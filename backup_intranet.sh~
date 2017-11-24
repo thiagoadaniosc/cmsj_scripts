@@ -1,0 +1,38 @@
+#!/bin/bash
+
+#Arquivo de Backup para  intranet da CMSJ
+
+#VARIAVEIS
+
+
+function backup_intranet() {
+
+DATE=`date +%Y-%m-%d`
+
+BACKUP_NAME=intranet-$DATE.zip
+BACKUP_DIR=/home/backup_cmsj
+
+#===============================
+
+echo "Iniciando Backup da Intranet"
+
+cd /var/www/
+
+zip -r $BACKUP_NAME html/
+
+mv $BACKUP_NAME /home/backup_cmsj/Backup_intranet
+
+cd $BACKUP_DIR
+
+pwd
+
+if [ -f "$BACKUP_NAME" ]
+then
+	echo "Arquivo $BACKUP_NAME criado com sucesso !"
+	echo "Backup Intranet criado com sucesso !"
+else
+	echo "Erro ao Criar Backup !"
+fi
+}
+
+backup_intranet
